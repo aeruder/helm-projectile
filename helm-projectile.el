@@ -492,8 +492,8 @@ CANDIDATE is the selected file.  Used when no file is explicitly marked."
     :candidates (lambda ()
                   (condition-case nil
                       (cl-loop for fo in (projectile-current-project-fileobjs)
-                               collect (cons (cached-file-get fo :relative)
-                                             (cached-file-get fo :absolute)))
+                               collect (cons (cached-value-get fo :relative)
+                                             (cached-value-get fo :absolute)))
                     (error nil)))
     :fuzzy-match helm-projectile-fuzzy-match
     :keymap helm-projectile-find-file-map
