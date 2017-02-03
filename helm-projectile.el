@@ -491,9 +491,9 @@ CANDIDATE is the selected file.  Used when no file is explicitly marked."
   (helm-build-sync-source "Projectile files"
     :candidates (lambda ()
                   (condition-case nil
-                      (cl-loop with root = (projectile-project-root)
-                               for display in (projectile-current-project-files)
-                               collect (cons display (expand-file-name display root)))
+                      (cl-loop for fo in (projectile-current-project-fileobjs)
+                               collect (cons (cached-file-get fo :relative)
+                                             (cached-file-get fo :absolute)))
                     (error nil)))
     :fuzzy-match helm-projectile-fuzzy-match
     :keymap helm-projectile-find-file-map
